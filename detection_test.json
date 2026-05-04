@@ -1,0 +1,300 @@
+{
+  "source_file": "c:\\Users\\AISpr\\Documents\\man_steel_combined\\auto_labeled_5dd598f1-b9b4-4775-a2c4-8117e6f7d984_Structural Drawings - D28387_ST_201_P2_Existing Office_GF Plan Showing Floor Structure Over.pdf",
+  "file_type": "pdf_vector",
+  "total_labels": 10,
+  "needs_review_count": 0,
+  "review_threshold": 0.7,
+  "processing_time_s": 0.072,
+  "records": [
+    {
+      "source_file": "c:\\Users\\AISpr\\Documents\\man_steel_combined\\auto_labeled_5dd598f1-b9b4-4775-a2c4-8117e6f7d984_Structural Drawings - D28387_ST_201_P2_Existing Office_GF Plan Showing Floor Structure Over.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "203 x 133 x 30 UB",
+      "normalised": "203X133X30UB",
+      "section_type": "UB",
+      "depth_mm": 203.0,
+      "width_mm": 133.0,
+      "mass_kg_m": 30.0,
+      "db_corrected": null,
+      "coordinates": {
+        "x": 825.173,
+        "y": 1095.507,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 1.0,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 1.0,
+        "composite": 0.9,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "c:\\Users\\AISpr\\Documents\\man_steel_combined\\auto_labeled_5dd598f1-b9b4-4775-a2c4-8117e6f7d984_Structural Drawings - D28387_ST_201_P2_Existing Office_GF Plan Showing Floor Structure Over.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "254 x 146 x 31 UB",
+      "normalised": "254X146X31UB",
+      "section_type": "UB",
+      "depth_mm": 254.0,
+      "width_mm": 146.0,
+      "mass_kg_m": 31.0,
+      "db_corrected": null,
+      "coordinates": {
+        "x": 825.173,
+        "y": 1116.387,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 1.0,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 1.0,
+        "composite": 0.9,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "c:\\Users\\AISpr\\Documents\\man_steel_combined\\auto_labeled_5dd598f1-b9b4-4775-a2c4-8117e6f7d984_Structural Drawings - D28387_ST_201_P2_Existing Office_GF Plan Showing Floor Structure Over.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "305 x 165 x 40 UB",
+      "normalised": "305X165X40UB",
+      "section_type": "UB",
+      "depth_mm": 305.0,
+      "width_mm": 165.0,
+      "mass_kg_m": 40.0,
+      "db_corrected": null,
+      "coordinates": {
+        "x": 825.173,
+        "y": 1137.147,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 1.0,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 1.0,
+        "composite": 0.9,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "c:\\Users\\AISpr\\Documents\\man_steel_combined\\auto_labeled_5dd598f1-b9b4-4775-a2c4-8117e6f7d984_Structural Drawings - D28387_ST_201_P2_Existing Office_GF Plan Showing Floor Structure Over.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "305 x 165 x 40 UB",
+      "normalised": "305X165X40UB",
+      "section_type": "UB",
+      "depth_mm": 305.0,
+      "width_mm": 165.0,
+      "mass_kg_m": 40.0,
+      "db_corrected": null,
+      "coordinates": {
+        "x": 825.173,
+        "y": 1157.907,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 1.0,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 1.0,
+        "composite": 0.9,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "c:\\Users\\AISpr\\Documents\\man_steel_combined\\auto_labeled_5dd598f1-b9b4-4775-a2c4-8117e6f7d984_Structural Drawings - D28387_ST_201_P2_Existing Office_GF Plan Showing Floor Structure Over.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "254 x 146 x 31 UB",
+      "normalised": "254X146X31UB",
+      "section_type": "UB",
+      "depth_mm": 254.0,
+      "width_mm": 146.0,
+      "mass_kg_m": 31.0,
+      "db_corrected": null,
+      "coordinates": {
+        "x": 825.293,
+        "y": 1178.667,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 1.0,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 1.0,
+        "composite": 0.9,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "c:\\Users\\AISpr\\Documents\\man_steel_combined\\auto_labeled_5dd598f1-b9b4-4775-a2c4-8117e6f7d984_Structural Drawings - D28387_ST_201_P2_Existing Office_GF Plan Showing Floor Structure Over.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "203 x 203 x 46 UC",
+      "normalised": "203X203X46UC",
+      "section_type": "UC",
+      "depth_mm": 203.0,
+      "width_mm": 203.0,
+      "mass_kg_m": 46.0,
+      "db_corrected": null,
+      "coordinates": {
+        "x": 934.678,
+        "y": 1280.787,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 1.0,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.0,
+        "composite": 0.8,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "c:\\Users\\AISpr\\Documents\\man_steel_combined\\auto_labeled_5dd598f1-b9b4-4775-a2c4-8117e6f7d984_Structural Drawings - D28387_ST_201_P2_Existing Office_GF Plan Showing Floor Structure Over.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "SHS100x100x6.3",
+      "normalised": "100X100X6.3SHS",
+      "section_type": "SHS",
+      "depth_mm": 100.0,
+      "width_mm": 100.0,
+      "mass_kg_m": 6.3,
+      "db_corrected": "100X100X6SHS",
+      "coordinates": {
+        "x": 607.007,
+        "y": 512.606,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.9231,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.8231,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "c:\\Users\\AISpr\\Documents\\man_steel_combined\\auto_labeled_5dd598f1-b9b4-4775-a2c4-8117e6f7d984_Structural Drawings - D28387_ST_201_P2_Existing Office_GF Plan Showing Floor Structure Over.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "SHS100x100x6.3",
+      "normalised": "100X100X6.3SHS",
+      "section_type": "SHS",
+      "depth_mm": 100.0,
+      "width_mm": 100.0,
+      "mass_kg_m": 6.3,
+      "db_corrected": "100X100X6SHS",
+      "coordinates": {
+        "x": 798.166,
+        "y": 1283.608,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.9231,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.8231,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "c:\\Users\\AISpr\\Documents\\man_steel_combined\\auto_labeled_5dd598f1-b9b4-4775-a2c4-8117e6f7d984_Structural Drawings - D28387_ST_201_P2_Existing Office_GF Plan Showing Floor Structure Over.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "UC 254x254x73",
+      "normalised": "254X254X73UC",
+      "section_type": "UC",
+      "depth_mm": 254.0,
+      "width_mm": 254.0,
+      "mass_kg_m": 73.0,
+      "db_corrected": null,
+      "coordinates": {
+        "x": 1023.74,
+        "y": 228.948,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 1.0,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.0,
+        "composite": 0.8,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "c:\\Users\\AISpr\\Documents\\man_steel_combined\\auto_labeled_5dd598f1-b9b4-4775-a2c4-8117e6f7d984_Structural Drawings - D28387_ST_201_P2_Existing Office_GF Plan Showing Floor Structure Over.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "CHS 114.3x6",
+      "normalised": "114.3X6CHS",
+      "section_type": "CHS",
+      "depth_mm": 114.3,
+      "width_mm": 6.0,
+      "mass_kg_m": null,
+      "db_corrected": "114.3X6.3CHS",
+      "coordinates": {
+        "x": 1364.72,
+        "y": 608.088,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.9091,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.8182,
+        "needs_review": false
+      }
+    }
+  ]
+}

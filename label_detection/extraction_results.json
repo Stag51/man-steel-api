@@ -1,0 +1,474 @@
+{
+  "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+  "file_type": "pdf_vector",
+  "total_labels": 16,
+  "needs_review_count": 0,
+  "review_threshold": 0.7,
+  "processing_time_s": 0.087,
+  "records": [
+    {
+      "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "100x100x6.3 SHS",
+      "normalised": "100X100X6.3SHS",
+      "section_type": "SHS",
+      "depth_mm": 100.0,
+      "width_mm": 100.0,
+      "mass_kg_m": 6.3,
+      "db_corrected": "100X100X6SHS",
+      "coordinates": {
+        "x": 428.232,
+        "y": 111.141,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.9231,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.8231,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "140x140x10 SHS",
+      "normalised": "140X140X10SHS",
+      "section_type": "SHS",
+      "depth_mm": 140.0,
+      "width_mm": 140.0,
+      "mass_kg_m": 10.0,
+      "db_corrected": "400X400X10SHS",
+      "coordinates": {
+        "x": 877.351,
+        "y": 602.284,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.8462,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.7962,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "160x80x5 RHS",
+      "normalised": "160X80X5RHS",
+      "section_type": "RHS",
+      "depth_mm": 160.0,
+      "width_mm": 80.0,
+      "mass_kg_m": 5.0,
+      "db_corrected": "100X50X5RHS",
+      "coordinates": {
+        "x": 1115.463,
+        "y": 921.842,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.8182,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.7864,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "250x250x8 SHS",
+      "normalised": "250X250X8SHS",
+      "section_type": "SHS",
+      "depth_mm": 250.0,
+      "width_mm": 250.0,
+      "mass_kg_m": 8.0,
+      "db_corrected": null,
+      "coordinates": {
+        "x": 383.889,
+        "y": 599.467,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 1.0,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.85,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "100x100x6.3 SHS",
+      "normalised": "100X100X6.3SHS",
+      "section_type": "SHS",
+      "depth_mm": 100.0,
+      "width_mm": 100.0,
+      "mass_kg_m": 6.3,
+      "db_corrected": "100X100X6SHS",
+      "coordinates": {
+        "x": 308.952,
+        "y": 111.141,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.9231,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.8231,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "100x100x6.3 SHS",
+      "normalised": "100X100X6.3SHS",
+      "section_type": "SHS",
+      "depth_mm": 100.0,
+      "width_mm": 100.0,
+      "mass_kg_m": 6.3,
+      "db_corrected": "100X100X6SHS",
+      "coordinates": {
+        "x": 547.632,
+        "y": 111.141,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.9231,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.8231,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "100x100x6.3 SHS",
+      "normalised": "100X100X6.3SHS",
+      "section_type": "SHS",
+      "depth_mm": 100.0,
+      "width_mm": 100.0,
+      "mass_kg_m": 6.3,
+      "db_corrected": "100X100X6SHS",
+      "coordinates": {
+        "x": 582.761,
+        "y": 143.394,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.9231,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.8231,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "100x100x6.3 SHS",
+      "normalised": "100X100X6.3SHS",
+      "section_type": "SHS",
+      "depth_mm": 100.0,
+      "width_mm": 100.0,
+      "mass_kg_m": 6.3,
+      "db_corrected": "100X100X6SHS",
+      "coordinates": {
+        "x": 582.792,
+        "y": 249.981,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.9231,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.8231,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "100x100x6.3 SHS",
+      "normalised": "100X100X6.3SHS",
+      "section_type": "SHS",
+      "depth_mm": 100.0,
+      "width_mm": 100.0,
+      "mass_kg_m": 6.3,
+      "db_corrected": "100X100X6SHS",
+      "coordinates": {
+        "x": 582.761,
+        "y": 364.794,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.9231,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.8231,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "100x100x6.3 SHS",
+      "normalised": "100X100X6.3SHS",
+      "section_type": "SHS",
+      "depth_mm": 100.0,
+      "width_mm": 100.0,
+      "mass_kg_m": 6.3,
+      "db_corrected": "100X100X6SHS",
+      "coordinates": {
+        "x": 582.792,
+        "y": 471.381,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.9231,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.8231,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "150x100x6.3 RHS",
+      "normalised": "150X100X6.3RHS",
+      "section_type": "RHS",
+      "depth_mm": 150.0,
+      "width_mm": 100.0,
+      "mass_kg_m": 6.3,
+      "db_corrected": "150X100X6RHS",
+      "coordinates": {
+        "x": 513.827,
+        "y": 348.391,
+        "unit": "pt"
+      },
+      "angle_deg": 90.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.9231,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.8231,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "100x100x6.3 SHS",
+      "normalised": "100X100X6.3SHS",
+      "section_type": "SHS",
+      "depth_mm": 100.0,
+      "width_mm": 100.0,
+      "mass_kg_m": 6.3,
+      "db_corrected": "100X100X6SHS",
+      "coordinates": {
+        "x": 195.099,
+        "y": 550.113,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.9231,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.8231,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "140x140x6.3 SHS",
+      "normalised": "140X140X6.3SHS",
+      "section_type": "SHS",
+      "depth_mm": 140.0,
+      "width_mm": 140.0,
+      "mass_kg_m": 6.3,
+      "db_corrected": "40X40X3SHS",
+      "coordinates": {
+        "x": 812.112,
+        "y": 527.301,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.8333,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.7917,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "140x140x6.3 SHS",
+      "normalised": "140X140X6.3SHS",
+      "section_type": "SHS",
+      "depth_mm": 140.0,
+      "width_mm": 140.0,
+      "mass_kg_m": 6.3,
+      "db_corrected": "40X40X3SHS",
+      "coordinates": {
+        "x": 1028.113,
+        "y": 527.301,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.8333,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.7917,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "150x100x6.3 RHS",
+      "normalised": "150X100X6.3RHS",
+      "section_type": "RHS",
+      "depth_mm": 150.0,
+      "width_mm": 100.0,
+      "mass_kg_m": 6.3,
+      "db_corrected": "150X100X6RHS",
+      "coordinates": {
+        "x": 388.649,
+        "y": 166.987,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.9231,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.8231,
+        "needs_review": false
+      }
+    },
+    {
+      "source_file": "drawings\\64410 - 301 - T2 - Superstructure Main House GF Plan.pdf",
+      "file_type": "pdf_vector",
+      "page_or_view": 1,
+      "raw_text": "140x140x5 SHS",
+      "normalised": "140X140X5SHS",
+      "section_type": "SHS",
+      "depth_mm": 140.0,
+      "width_mm": 140.0,
+      "mass_kg_m": 5.0,
+      "db_corrected": "40X40X2.5SHS",
+      "coordinates": {
+        "x": 1816.523,
+        "y": 1143.666,
+        "unit": "pt"
+      },
+      "angle_deg": 0.0,
+      "source": "pdf_vector",
+      "is_provided": true,
+      "confidence": {
+        "ocr_prob": 1.0,
+        "db_score": 0.8333,
+        "spatial_score": 0.5,
+        "clarity_score": 1.0,
+        "orientation_score": 0.5,
+        "composite": 0.7917,
+        "needs_review": false
+      }
+    }
+  ]
+}

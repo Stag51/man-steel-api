@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+ENV/
+
+# Project Specific Data (Protecting Privacy)
+data/
+uploads/
+outputs/
+project_db.json
+
+# Temporary Files
+*.log
+*.pdf
+.DS_Store
+.idea/
+.vscode/

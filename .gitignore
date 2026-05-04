@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+ENV/
+
+# Project data (privacy)
+labeling/uploads/
+labeling/outputs/
+labeling/data/
+labeling/project_db.json
+detection_uploads/
+detection_outputs/
+*.log
+
+# Temporary / testing
+test_ui/
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
+Thumbs.db
