@@ -25,7 +25,7 @@ def _load() -> dict:
             return json.loads(_STORE_PATH.read_text(encoding="utf-8"))
         except Exception:
             pass
-    return {"corrections": {}, "history": []}
+    return {"corrections": {}, "history": [], "ignored_regions": []}
 
 
 def _save(data: dict) -> None:
@@ -102,11 +102,36 @@ def record_correction(
     return entry
 
 
-def lookup_correction(shape_type: str, w_mm: float, h_mm: float) -> Optional[str]:
+def record_exclusion(page: int, x: float, y: float, source: str = "auto_label") -> list:
+    """
+    Record that a certain (x, y) point is 'outside' the drawing.
+    Used to refine boundary detection.
+    """
+    data = _load()
+    region = {"page": page, "x": round(x, 1), "y": round(y, 1), "r": 40.0} # 40pt exclusion zone
+    data["ignored_regions"].append(region)
+    _save(data)
+    return data["ignored_regions"]
+
+
+def is_spatially_ignored(page: int, x: float, y: float) -> bool:
+    """Check if a point falls within a user-defined exclusion zone."""
+    data = _load()
+    for reg in data.get("ignored_regions", []):
+        dist_sq = (x - reg["x"])**2 + (y - reg["y"])**2
+        if dist_sq < reg["r"]**2:
+            return True
+    return False
+
+
+def lookup_correction(shape_type: str, w_mm: float, h_mm: float, page: int = -1, x: float = 0, y: float = 0) -> Optional[str]:
     """
     Return the human-corrected label for this shape, or None if no correction exists.
-    Called by the label engine before falling back to the section table.
+    Also returns '__IGNORE__' if the shape or region is excluded.
     """
+    if page != -1 and is_spatially_ignored(page, x, y):
+        return "__IGNORE__"
+
     data = _load()
     k = _key(shape_type, w_mm, h_mm)
     entry = data["corrections"].get(k)

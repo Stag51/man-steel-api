@@ -31,11 +31,9 @@ def match_section(w, h, shape_type='rect', tolerance=3.0):
     best_match = None
     min_diff = float('inf')
     
-    # If the shape is too aspect-ratio heavy, it's a wall or line, not a column/beam section
-    if shape_type == 'rect':
-        aspect = max(w, h) / min(w, h) if min(w, h) > 0 else 100
-        if aspect > 2.5: # Columns/Beams are usually near-square or only 2x tall
-            return None
+    # Removed strict aspect ratio check to allow long beams in plan view
+    # (Previously aspect > 2.5 was returning None)
+    pass
 
     for (sw, sh, stype), label in SECTION_TABLE.items():
         if stype != shape_type:
