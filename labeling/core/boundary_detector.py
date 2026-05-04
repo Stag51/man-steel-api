@@ -133,19 +133,10 @@ def get_effective_frames(page: fitz.Page) -> List[DrawingFrame]:
     frames = detect_drawing_frames(page)
 
     if frames:
-        # Sort by area descending
-        frames.sort(key=lambda f: (f.x1 - f.x0) * (f.y1 - f.y0), reverse=True)
-        largest = frames[0]
-        l_area = (largest.x1 - largest.x0) * (largest.y1 - largest.y0)
-        
-        # If the largest frame is a significant portion of the page, it's our Main Drawing
-        if l_area >= page_area * 0.30:
-            return [largest]
-        
-        # Otherwise, if we have multiple frames that collectively cover the page
-        covered = sum((f.x1 - f.x0) * (f.y1 - f.y0) for f in frames)
-        if covered >= page_area * 0.40:
-            return frames
+        # Include all frames that are at least 5% of the page area
+        significant_frames = [f for f in frames if (f.rect.width * f.rect.height) >= page_area * 0.05]
+        if significant_frames:
+            return significant_frames
 
     # Fallback to generous margins
     return [DrawingFrame(fitz.Rect(pw * 0.01, ph * 0.05, pw * 0.92, ph * 0.90))]

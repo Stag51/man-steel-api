@@ -14,8 +14,8 @@ class Config:
     DEFAULT_LABEL_SIZE = 8
     
     # Hub Clustering Settings (pts)
-    HUB_RADIUS = 35
-    DEDUPLICATION_THRESHOLD = 15
+    HUB_RADIUS = 15
+    DEDUPLICATION_THRESHOLD = 10
     STRICT_MATCH_TOLERANCE = 3.0 # mm
 
     # Colors (RGB normalized 0-1)
