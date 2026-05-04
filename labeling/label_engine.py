@@ -10,6 +10,7 @@ from core.matching import match_section
 from core.clustering import ClusteringService
 from core.boundary_detector import get_effective_frames, point_in_drawing
 from core.feedback_store import lookup_correction
+from core.weight_calculator import get_calculator
 
 
 class LabelEngine:
@@ -145,9 +146,10 @@ class LabelEngine:
                                 if not hasattr(hub, "candidate_sources"):
                                     hub.candidate_sources = []
                                 hub.candidate_sources.append(source)
-                                # Store dimensions for feedback
+                                # Store dimensions for weightage
                                 hub.w_mm = w_mm
                                 hub.h_mm = h_mm
+                                hub.length_mm = max(w_mm, h_mm)
                                 hub.shape_type = shape_type
 
                 # ── Phase 3: Emit label events ────────────────────────────────
@@ -169,7 +171,7 @@ class LabelEngine:
                         continue
 
                     label_id = f"p{page_num}_l{label_counter}"
-                    yield {
+                    event = {
                         "type": "label",
                         "page": page_num,
                         "id": label_id,
@@ -181,8 +183,18 @@ class LabelEngine:
                         "confidence": confidence,
                         "w_mm": round(getattr(hub, "w_mm", 0) or 0, 1),
                         "h_mm": round(getattr(hub, "h_mm", 0) or 0, 1),
+                        "length_mm": round(getattr(hub, "length_mm", 0) or 0, 1),
                         "shape_type": getattr(hub, "shape_type", "rect"),
                     }
+                    
+                    # Add Weightage
+                    calc = get_calculator()
+                    u_weight = calc.get_unit_weight(display_text)
+                    event["unit_weight"] = u_weight
+                    event["weight_kg"] = round(u_weight * (event["length_mm"] / 1000.0), 2)
+                    
+                    yield event
+                    
                     label_counter += 1
                     total_labels += 1
                     import time
