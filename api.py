@@ -28,10 +28,12 @@ from config import Config as LabelingConfig
 from label_engine import LabelEngine
 from core.feedback_store import (
     record_correction,
+    record_exclusion,
     get_all_corrections,
     get_history,
     correction_count,
 )
+
 import pipeline as detection_pipeline
 
 # ── FastAPI app ───────────────────────────────────────────────────────────────
@@ -61,6 +63,7 @@ app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 # ── In-memory job store (job_id → asyncio.Queue) ─────────────────────────────
 _job_queues: dict[str, asyncio.Queue] = {}
 _job_meta:   dict[str, dict]          = {}
+_cancelled_jobs: set[str]             = set()
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -115,6 +118,9 @@ async def _run_job(job_id: str):
     queue = _job_queues[job_id]
     loop  = asyncio.get_event_loop()
 
+    def _check_cancelled():
+        return job_id in _cancelled_jobs
+
     def _work():
         ptype = meta["pipeline_type"]
         if ptype == "auto_label":
@@ -124,6 +130,8 @@ async def _run_job(job_id: str):
                 label_size=meta["label_size"],
             )
             for event in engine.stream_labels(meta["input_path"], mode=meta["mode"]):
+                if _check_cancelled():
+                    break
                 asyncio.run_coroutine_threadsafe(queue.put(event), loop)
         else:
             # Detection pipeline — emit a single batch result
@@ -138,6 +146,7 @@ async def _run_job(job_id: str):
                 queue.put({"type": "start", "total_pages": 1}), loop
             )
             for rec in results.get("records", []):
+                if _check_cancelled(): break
                 event = {
                     "type": "label",
                     "page": rec.get("page_or_view", 0),
@@ -155,6 +164,13 @@ async def _run_job(job_id: str):
                     "width_mm": rec.get("width_mm"),
                 }
                 asyncio.run_coroutine_threadsafe(queue.put(event), loop)
+                import time
+                time.sleep(0.6)
+            asyncio.run_coroutine_threadsafe(
+                queue.put({"type": "complete", "total_labels": len(results.get("records", []))}),
+                loop,
+            )
+                time.sleep(0.6) # Consistent delay for OCR pipeline
             asyncio.run_coroutine_threadsafe(
                 queue.put({"type": "complete", "total_labels": len(results.get("records", []))}),
                 loop,
@@ -292,6 +308,32 @@ async def list_corrections():
 @app.get("/feedback/history")
 async def list_history(limit: int = 50):
     return {"history": get_history(limit=limit)}
+
+
+@app.post("/feedback/exclude")
+async def exclude_region(payload: dict):
+    """
+    Mark a point as 'outside the drawing'.
+    Body: { "page": 0, "x": 100, "y": 200 }
+    """
+    if "page" not in payload or "x" not in payload or "y" not in payload:
+        raise HTTPException(status_code=422, detail="Missing page, x, or y")
+    
+    regions = record_exclusion(
+        page=int(payload["page"]),
+        x=float(payload["x"]),
+        y=float(payload["y"])
+    )
+    return {"status": "excluded", "total_regions": len(regions)}
+
+
+@app.post("/stop/{job_id}")
+async def stop_job(job_id: str):
+    """Signals a background job to stop immediately."""
+    if job_id not in _job_queues:
+        raise HTTPException(status_code=404, detail="Job not found")
+    _cancelled_jobs.add(job_id)
+    return {"status": "stopping", "job_id": job_id}
 
 
 # ══════════════════════════════════════════════════════════════════════════════

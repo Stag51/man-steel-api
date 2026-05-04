@@ -65,8 +65,10 @@ def detect_drawing_frames(page: fitz.Page) -> List[DrawingFrame]:
         w, h = rect.width, rect.height
         area = w * h
 
-        # Area range filter
-        if area < page_area * 0.05 or area > page_area * 0.97:
+        # Area range: must be a MAJOR frame (>=25% of page), not a small detail box.
+        # The 25% threshold stops schedule tables and tiny detail frames from
+        # being treated as drawing boundaries and blocking the main floor plan.
+        if area < page_area * 0.25 or area > page_area * 0.97:
             continue
 
         # Minimum thickness (reject dimension lines / thin borders)
@@ -122,16 +124,31 @@ def _deduplicate(frames: List[DrawingFrame]) -> List[DrawingFrame]:
 
 def get_effective_frames(page: fitz.Page) -> List[DrawingFrame]:
     """
-    Return detected drawing frames.  If none found, return a single
-    conservative fallback that excludes typical title-block areas.
+    Return detected drawing frames, or a permissive page-margin fallback.
+    Prioritizes the single largest frame as the 'Main Drawing'.
     """
-    frames = detect_drawing_frames(page)
-    if frames:
-        return frames
-
-    # Fallback: exclude right-side / bottom title block
     pw, ph = page.rect.width, page.rect.height
-    return [DrawingFrame(fitz.Rect(pw * 0.01, ph * 0.03, pw * 0.87, ph * 0.92))]
+    page_area = pw * ph
+
+    frames = detect_drawing_frames(page)
+
+    if frames:
+        # Sort by area descending
+        frames.sort(key=lambda f: (f.x1 - f.x0) * (f.y1 - f.y0), reverse=True)
+        largest = frames[0]
+        l_area = (largest.x1 - largest.x0) * (largest.y1 - largest.y0)
+        
+        # If the largest frame is a significant portion of the page, it's our Main Drawing
+        if l_area >= page_area * 0.30:
+            return [largest]
+        
+        # Otherwise, if we have multiple frames that collectively cover the page
+        covered = sum((f.x1 - f.x0) * (f.y1 - f.y0) for f in frames)
+        if covered >= page_area * 0.40:
+            return frames
+
+    # Fallback to generous margins
+    return [DrawingFrame(fitz.Rect(pw * 0.01, ph * 0.05, pw * 0.92, ph * 0.90))]
 
 
 def point_in_drawing(x: float, y: float, frames: List[DrawingFrame],

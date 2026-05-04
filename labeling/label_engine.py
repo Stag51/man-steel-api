@@ -128,8 +128,11 @@ class LabelEngine:
                         if len(p.get("items", [])) >= max_segments:
                             continue
 
-                        # ── Feedback override ──────────────────────────────────
-                        label = lookup_correction(shape_type, w_mm, h_mm)
+                        # ── Feedback & Spatial Exclusion ──────────────────────────
+                        label = lookup_correction(shape_type, w_mm, h_mm, page=page_num, x=cx, y=cy)
+                        if label == "__IGNORE__":
+                            continue
+                            
                         source = "feedback"
                         if label is None:
                             label = match_section(w_mm, h_mm, shape_type)
@@ -139,8 +142,13 @@ class LabelEngine:
                             hub = cluster_service.find_or_create_hub(cx, cy)
                             if label not in hub.candidates:
                                 hub.candidates.append(label)
-                                hub.candidate_sources = getattr(hub, "candidate_sources", [])
+                                if not hasattr(hub, "candidate_sources"):
+                                    hub.candidate_sources = []
                                 hub.candidate_sources.append(source)
+                                # Store dimensions for feedback
+                                hub.w_mm = w_mm
+                                hub.h_mm = h_mm
+                                hub.shape_type = shape_type
 
                 # ── Phase 3: Emit label events ────────────────────────────────
                 for hub in cluster_service.hubs:
@@ -171,12 +179,14 @@ class LabelEngine:
                         "color": color,
                         "source": source,
                         "confidence": confidence,
-                        "w_mm": None,
-                        "h_mm": None,
-                        "shape_type": "rect",
+                        "w_mm": round(getattr(hub, "w_mm", 0) or 0, 1),
+                        "h_mm": round(getattr(hub, "h_mm", 0) or 0, 1),
+                        "shape_type": getattr(hub, "shape_type", "rect"),
                     }
                     label_counter += 1
                     total_labels += 1
+                    import time
+                    time.sleep(0.6) # Very deliberate delay for one-by-one review UX
 
                 yield {
                     "type": "progress",
@@ -247,7 +257,10 @@ class LabelEngine:
                         if len(p.get("items", [])) >= max_seg:
                             continue
 
-                        label = lookup_correction(shape_type, w_mm, h_mm)
+                        label = lookup_correction(shape_type, w_mm, h_mm, page=page_num, x=cx, y=cy)
+                        if label == "__IGNORE__":
+                            continue
+                            
                         source = "feedback" if label else "geometric"
                         if label is None:
                             label = match_section(w_mm, h_mm, shape_type)
@@ -255,7 +268,8 @@ class LabelEngine:
                             hub = cluster_service.find_or_create_hub(cx, cy)
                             if label not in hub.candidates:
                                 hub.candidates.append(label)
-                                hub.candidate_sources = getattr(hub, "candidate_sources", [])
+                                if not hasattr(hub, "candidate_sources"):
+                                    hub.candidate_sources = []
                                 hub.candidate_sources.append(source)
 
                 # Phase 3: Draw labels
