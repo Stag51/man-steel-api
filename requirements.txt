@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-multipart
+pymupdf
+pdfplumber
+pypdf
+reportlab
+requests
+pdf2image
+Pillow
+numpy
+opencv-python-headless
+paddlepaddle
+paddleocr
