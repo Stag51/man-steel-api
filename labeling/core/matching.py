@@ -5,51 +5,81 @@ from config import Config
 
 # Common British/European section sizes
 SECTION_TABLE = {
-    # UC (Universal Columns)
-    (152, 152, 'rect'): "UC 152x152x37",
-    (152.4, 152.4, 'rect'): "UC 152x152x37",
-    (203, 203, 'rect'): "UC 203x203x46",
-    (203.2, 203.2, 'rect'): "UC 203x203x46",
-    (254, 254, 'rect'): "UC 254x254x73",
-    (305, 305, 'rect'): "UC 305x305x118",
-    
-    # UB (Universal Beams)
-    (178, 102, 'rect'): "178x102x19 UB",
-    (203, 102, 'rect'): "203x102x23 UB",
-    (203, 133, 'rect'): "203x133x30 UB",
-    (254, 102, 'rect'): "254x102x22 UB",
-    (254, 146, 'rect'): "254x146x31 UB",
-    (305, 102, 'rect'): "305x102x25 UB",
-    (305, 127, 'rect'): "305x127x37 UB",
-    (305, 165, 'rect'): "305x165x40 UB",
-    (356, 127, 'rect'): "356x127x33 UB",
-    (356, 171, 'rect'): "356x171x51 UB",
-    (406, 140, 'rect'): "406x140x39 UB",
-    (406, 178, 'rect'): "406x178x67 UB",
-    (457, 152, 'rect'): "457x152x52 UB",
-    (457, 191, 'rect'): "457x191x74 UB",
+    # ── UC (Universal Columns) ─────────────────────────────────────────────────
+    (152, 152, 'rect'): "UC152x152x37",
+    (152.4, 152.4, 'rect'): "UC152x152x37",
+    (203, 203, 'rect'): "UC203x203x46",
+    (203.2, 203.2, 'rect'): "UC203x203x46",
+    (254, 254, 'rect'): "UC254x254x73",
+    (305, 305, 'rect'): "UC305x305x118",
+    (356, 368, 'rect'): "UC356x368x202",
 
-    # PFC (Parallel Flange Channels)
-    (150, 75, 'rect'): "PFC 150x75x18",
-    (150, 90, 'rect'): "PFC 150x90x24",
-    (180, 75, 'rect'): "PFC 180x75x20",
-    (200, 75, 'rect'): "PFC 200x75x23",
-    (200, 90, 'rect'): "PFC 200x90x30",
+    # ── UB (Universal Beams) ───────────────────────────────────────────────────
+    # 178 family
+    (178, 102, 'rect'): "UB178x102x19",
+    # 203 family
+    (203, 102, 'rect'): "UB203x102x23",
+    (203, 133, 'rect'): "UB203x133x25",
+    # 254 family
+    (254, 102, 'rect'): "UB254x102x22",
+    (254, 146, 'rect'): "UB254x146x31",
+    # 305 family
+    (305, 102, 'rect'): "UB305x102x25",
+    (305, 127, 'rect'): "UB305x127x37",
+    (305, 165, 'rect'): "UB305x165x40",
+    # 356 family
+    (356, 127, 'rect'): "UB356x127x33",
+    (356, 171, 'rect'): "UB356x171x45",
+    # 406 family
+    (406, 140, 'rect'): "UB406x140x39",
+    (406, 178, 'rect'): "UB406x178x54",
+    # 457 family
+    (457, 152, 'rect'): "UB457x152x52",
+    (457, 191, 'rect'): "UB457x191x67",
+    # 533 family
+    (533, 210, 'rect'): "UB533x210x82",
+    # 610 family
+    (610, 229, 'rect'): "UB610x229x101",
 
-    # SHS/RHS (Hollow Sections)
-    (100, 100, 'rect'): "SHS 100x100x6.3",
-    (120, 120, 'rect'): "SHS 120x120x8",
-    (140, 140, 'rect'): "SHS 140x140x10",
-    (150, 150, 'rect'): "SHS 150x150x10",
-    (200, 100, 'rect'): "RHS 200x100x8",
-    (200, 200, 'rect'): "SHS 200x200x10",
-    
-    # CHS (Circular Hollow Sections)
-    (193.7, 193.7, 'circle'): "CHS 193.7x10",
-    (168.3, 168.3, 'circle'): "CHS 168.3x10",
-    (139.7, 139.7, 'circle'): "CHS 139.7x10",
-    (114.3, 114.3, 'circle'): "CHS 114.3x6",
-    (88.9, 88.9, 'circle'): "CHS 88.9x5",
+    # ── PFC (Parallel Flange Channels) ────────────────────────────────────────
+    (100, 50, 'rect'): "PFC100x50x10",
+    (125, 65, 'rect'): "PFC125x65x15",
+    (150, 75, 'rect'): "PFC150x75x18",
+    (150, 90, 'rect'): "PFC150x90x24",
+    (180, 75, 'rect'): "PFC180x75x20",
+    (200, 75, 'rect'): "PFC200x75x23",
+    (200, 90, 'rect'): "PFC200x90x30",
+    (230, 90, 'rect'): "PFC230x90x32",
+    (260, 90, 'rect'): "PFC260x90x35",
+    (300, 100, 'rect'): "PFC300x100x46",
+
+    # ── SHS (Square Hollow Sections) ──────────────────────────────────────────
+    (80, 80, 'rect'): "SHS80x80x5",
+    (100, 100, 'rect'): "SHS100x100x6.3",
+    (120, 120, 'rect'): "SHS120x120x8",
+    (140, 140, 'rect'): "SHS140x140x10",
+    (150, 150, 'rect'): "SHS150x150x10",
+    (160, 160, 'rect'): "SHS160x160x10",
+    (180, 180, 'rect'): "SHS180x180x10",
+    (200, 200, 'rect'): "SHS200x200x10",
+    (250, 250, 'rect'): "SHS250x250x12.5",
+
+    # ── RHS (Rectangular Hollow Sections) ─────────────────────────────────────
+    (200, 100, 'rect'): "RHS200x100x5",
+    (250, 150, 'rect'): "RHS250x150x12.5",
+    (300, 200, 'rect'): "RHS300x200x10",
+    (400, 200, 'rect'): "RHS400x200x12.5",
+
+    # ── CHS (Circular Hollow Sections) ────────────────────────────────────────
+    (60.3, 60.3, 'circle'): "CHS60.3x5",
+    (76.1, 76.1, 'circle'): "CHS76.1x5",
+    (88.9, 88.9, 'circle'): "CHS88.9x5",
+    (101.6, 101.6, 'circle'): "CHS101.6x6.3",
+    (114.3, 114.3, 'circle'): "CHS114.3x6.3",
+    (139.7, 139.7, 'circle'): "CHS139.7x8",
+    (168.3, 168.3, 'circle'): "CHS168.3x10",
+    (193.7, 193.7, 'circle'): "CHS193.7x10",
+    (219.1, 219.1, 'circle'): "CHS219.1x10",
 }
 
 def match_section(w, h, shape_type='rect'):

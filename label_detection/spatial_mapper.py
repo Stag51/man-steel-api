@@ -205,20 +205,24 @@ def is_in_drawing_zone(
     centre_pt: tuple[float, float],
     img_size_px: tuple[int, int],
     dpi: float,
-    right_margin_pct: float = 0.20,
-    bottom_margin_pct: float = 0.10,
+    right_margin_pct: float = 0.15,
+    bottom_margin_pct: float = 0.35,
+    top_margin_pct: float = 0.05,
+    left_margin_pct: float = 0.01,
 ) -> bool:
     """
     Return True if the centre point is within the 'Main Drawing' area.
-    Filters out labels located in common legend/title-block areas.
+    Filters out labels located in common legend/title-block/notes areas.
 
     Parameters
     ----------
     centre_pt         : (cx, cy) in PDF points
     img_size_px       : (width, height) of the rendered image in pixels
     dpi               : resolution used for rendering
-    right_margin_pct  : fraction of width to ignore on the right (0.20 = 20%)
-    bottom_margin_pct : fraction of height to ignore at the bottom (0.10 = 10%)
+    right_margin_pct  : fraction of width to ignore on the right (title block)
+    bottom_margin_pct : fraction of height to ignore at the bottom (notes/blank)
+    top_margin_pct    : fraction of height to ignore at the top (drawing title)
+    left_margin_pct   : fraction of width to ignore on the left edge
     """
     factor = 72.0 / dpi
     page_w_pt = img_size_px[0] * factor
@@ -226,11 +230,16 @@ def is_in_drawing_zone(
 
     cx, cy = centre_pt
 
-    # Define boundaries
-    # Note: cy=0 is top in PDF points if derived directly from pixel-y
-    # We check if cx is too far right or cy is too far down
+    # Left edge (drawing border strip)
+    if cx < page_w_pt * left_margin_pct:
+        return False
+    # Right margin (title block / revision table)
     if cx > page_w_pt * (1.0 - right_margin_pct):
         return False
+    # Top strip (drawing number / project title band)
+    if cy < page_h_pt * top_margin_pct:
+        return False
+    # Bottom margin: blank white space / general notes below floor plan
     if cy > page_h_pt * (1.0 - bottom_margin_pct):
         return False
 
