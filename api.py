@@ -128,7 +128,18 @@ async def submit_feedback(payload: dict):
 async def list_corrections():
     return {"corrections": get_all_corrections()}
 
-# ── PILLAR 4: RESOURCES ───────────────────────────────────────────────────────
+# ── PILLAR 4: CALCULATIONS ────────────────────────────────────────────────────
+
+@app.post("/calculate-weightage")
+async def calculate_weightage(payload: dict):
+    """
+    Returns unit weights and total weights for a list of labels.
+    """
+    labels = payload.get("labels", [])
+    calc = get_calculator()
+    return calc.calculate(labels)
+
+# ── PILLAR 5: RESOURCES ───────────────────────────────────────────────────────
 
 @app.get("/page-image/{job_id}/{page_num}")
 async def get_page_image(job_id: str, page_num: int, dpi: int = 150):
@@ -140,6 +151,49 @@ async def get_page_image(job_id: str, page_num: int, dpi: int = 150):
     doc.close()
     import io
     return StreamingResponse(io.BytesIO(img_bytes), media_type="image/png")
+
+@app.post("/download-labeled/{job_id}")
+async def download_labeled_pdf(job_id: str, payload: dict):
+    """
+    Generates a labeled PDF using labels provided by the client.
+    """
+    try:
+        if job_id not in _job_meta:
+            logger.error(f"Job {job_id} not found in meta")
+            raise HTTPException(status_code=404, detail="Job session expired or not found")
+        
+        labels = payload.get("labels", [])
+        meta = _job_meta[job_id]
+        input_path = meta["input_path"]
+        
+        if not os.path.exists(input_path):
+            logger.error(f"Input file not found: {input_path}")
+            raise HTTPException(status_code=404, detail="Original drawing file missing on server")
+
+        output_filename = f"labeled_{Path(input_path).name}"
+        output_path = DETECTION_UPLOAD_DIR / output_filename
+        
+        logger.info(f"Generating labeled PDF for job {job_id} with {len(labels)} labels")
+        
+        engine = LabelEngine(meta["paper_size"], meta["scale_ratio"])
+        
+        # Apply labels
+        engine.apply_labels_manual(input_path, str(output_path), labels)
+        
+        if not output_path.exists():
+            logger.error(f"Output file was not created at {output_path}")
+            raise HTTPException(status_code=500, detail="Engine failed to create output file")
+            
+        return FileResponse(
+            path=output_path,
+            filename=output_filename,
+            media_type="application/pdf"
+        )
+    except HTTPException as he:
+        raise he
+    except Exception as e:
+        logger.exception(f"Detailed failure in download_labeled_pdf for job {job_id}")
+        raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
 # ── WORKER LOGIC ─────────────────────────────────────────────────────────────
 
@@ -161,32 +215,65 @@ async def _run_job(job_id: str):
                 # Initialize Engine for measurement fallback
                 engine = LabelEngine(meta["paper_size"], meta["scale_ratio"])
                 doc = fitz.open(meta["input_path"])
-                page_geo = doc[0].get_drawings(); doc.close()
+                page = doc[0]
+                page_geo = page.get_drawings()
+                page_rect = page.rect
+                
+                # Build boundary frames for OCR coordinate filtering
+                from core.boundary_detector import get_effective_frames, point_in_drawing
+                sys.path.insert(0, str(BASE_DIR / "labeling"))
+                frames = get_effective_frames(page)
+                doc.close()
                 
                 asyncio.run_coroutine_threadsafe(queue.put({"type":"start", "total_pages":1}), loop)
                 import math
+                label_count = 0
                 for rec in results.get("records", []):
                     if job_id in _cancelled_jobs: break
                     lbl = rec.get("normalised", rec.get("raw_text", ""))
                     u_weight = calc.get_unit_weight(lbl)
-                    x, y = rec["coordinates"]["x"], rec["coordinates"]["y"]
-                    # Measure nearest
+                    # Raw PDF coords from vector extractor
+                    x_raw, y_raw = rec["coordinates"]["x"], rec["coordinates"]["y"]
+                    # Normalize to CropBox origin (same as geometric pipeline)
+                    x = x_raw - page_rect.x0
+                    y = y_raw - page_rect.y0
+                    
+                    # Apply boundary gate — skip labels in blank/notes area
+                    if not point_in_drawing(x, y, frames, margin=5.0):
+                        logger.debug(f"OCR label '{lbl}' at ({x:.0f},{y:.0f}) outside drawing boundary — skipped")
+                        continue
+                    
+                    # Measure nearest geometry element
                     length_mm = 1000.0
                     best = 50.0
                     for g in page_geo:
                         r = g["rect"]
-                        d = math.hypot(x - (r.x0+r.x1)/2, y - (r.y0+r.y1)/2)
+                        d = math.hypot(x - (r.x0+r.x1)/2 + page_rect.x0, y - (r.y0+r.y1)/2 + page_rect.y0)
                         if d < best: 
                             length_mm = max(engine.pt_to_real_mm(r.x1-r.x0), engine.pt_to_real_mm(r.y1-r.y0))
                             best = d
                     
+                    conf_raw = rec.get("confidence", {})
+                    confidence = conf_raw.get("composite", 0.8) if isinstance(conf_raw, dict) else 0.8
+                    needs_review = conf_raw.get("needs_review", False) if isinstance(conf_raw, dict) else False
+                    
                     asyncio.run_coroutine_threadsafe(queue.put({
-                        "type":"label", "page":0, "id":str(uuid.uuid4()), "label":lbl, "x":x, "y":y,
-                        "source":"ocr", "unit_weight":u_weight, "length_mm":round(length_mm,1),
+                        "type":"label", "page":0,
+                        "id":str(uuid.uuid4()),
+                        "label":lbl,
+                        "raw_text": rec.get("raw_text", lbl),
+                        "x": round(x, 2), "y": round(y, 2),
+                        "color": "orange" if needs_review else "blue",
+                        "source":rec.get("source", "ocr"),
+                        "confidence": round(confidence, 4),
+                        "needs_review": needs_review,
+                        "unit_weight":u_weight,
+                        "length_mm":round(length_mm,1),
                         "weight_kg":round(u_weight * (length_mm/1000.0),2)
                     }), loop)
+                    label_count += 1
                     import time; time.sleep(0.6)
-                asyncio.run_coroutine_threadsafe(queue.put({"type":"complete", "total_labels":len(results["records"])}), loop)
+                asyncio.run_coroutine_threadsafe(queue.put({"type":"complete", "total_labels": label_count}), loop)
         except Exception as e:
             logger.exception(f"Job {job_id} failed")
             asyncio.run_coroutine_threadsafe(queue.put({"type":"error", "message":str(e)}), loop)

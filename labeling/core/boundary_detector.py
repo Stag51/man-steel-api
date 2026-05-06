@@ -65,10 +65,10 @@ def detect_drawing_frames(page: fitz.Page) -> List[DrawingFrame]:
         w, h = rect.width, rect.height
         area = w * h
 
-        # Area range: must be a MAJOR frame (>=25% of page), not a small detail box.
-        # The 25% threshold stops schedule tables and tiny detail frames from
+        # Area range: must be a MAJOR frame (>=15% of page), not a small detail box.
+        # The 15% threshold stops schedule tables and tiny detail frames from
         # being treated as drawing boundaries and blocking the main floor plan.
-        if area < page_area * 0.25 or area > page_area * 0.97:
+        if area < page_area * 0.15 or area > page_area * 0.97:
             continue
 
         # Minimum thickness (reject dimension lines / thin borders)
@@ -122,28 +122,62 @@ def _deduplicate(frames: List[DrawingFrame]) -> List[DrawingFrame]:
     return result
 
 
+def detect_content_bbox(page: fitz.Page):
+    """
+    Compute the actual drawing bounding box using path-centroid percentile statistics.
+    Uses 5th-95th pct for X, 5th-80th pct for Y to exclude isolated outlier
+    annotations in the blank lower portion of the page.
+    Returns a fitz.Rect or None if insufficient data.
+    """
+    x0_list, y0_list, x1_list, y1_list = [], [], [], []
+    for path in page.get_drawings():
+        r = path.get("rect")
+        if not r or r.width < 10 or r.height < 10:
+            continue
+        x0_list.append(r.x0)
+        y0_list.append(r.y0)
+        x1_list.append(r.x1)
+        y1_list.append(r.y1)
+
+    if len(x0_list) < 20:
+        return None
+
+    def pct(data, p):
+        s = sorted(data)
+        idx = max(0, min(int(len(s) * p / 100), len(s) - 1))
+        return s[idx]
+
+    bx0, bx1 = pct(x0_list, 5),  pct(x1_list, 95)
+    by0, by1 = pct(y0_list, 5),  pct(y1_list, 80)   # 80th pct cuts blank lower area
+    if bx1 <= bx0 or by1 <= by0:
+        return None
+    return fitz.Rect(bx0, by0, bx1, by1)
+
+
 def get_effective_frames(page: fitz.Page) -> List[DrawingFrame]:
     """
-    Return detected drawing frames, or a permissive page-margin fallback.
-    Prioritizes the single largest frame as the 'Main Drawing'.
+    Return detected drawing frames, or fall back to content-bbox, then margin heuristic.
     """
     pw, ph = page.rect.width, page.rect.height
     page_area = pw * ph
 
     frames = detect_drawing_frames(page)
-
     if frames:
-        # Include all frames that are at least 5% of the page area
-        significant_frames = [f for f in frames if (f.rect.width * f.rect.height) >= page_area * 0.05]
+        significant_frames = [f for f in frames if (f.rect.width * f.rect.height) >= page_area * 0.03]
         if significant_frames:
             return significant_frames
 
-    # Fallback to generous margins
-    return [DrawingFrame(fitz.Rect(pw * 0.01, ph * 0.05, pw * 0.92, ph * 0.90))]
+    # Fallback 1: derive boundary from actual path distribution
+    content_rect = detect_content_bbox(page)
+    if content_rect:
+        return [DrawingFrame(content_rect)]
+
+    # Fallback 2: hardcoded — floor plan occupies ~top 65% of page
+    return [DrawingFrame(fitz.Rect(pw * 0.01, ph * 0.04, pw * 0.88, ph * 0.65))]
 
 
 def point_in_drawing(x: float, y: float, frames: List[DrawingFrame],
-                     margin: float = 10.0) -> bool:
+                     margin: float = 2.0) -> bool:
     """Return True if (x, y) is inside at least one detected drawing frame."""
     if not frames:
         return True
